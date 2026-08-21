@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+const title = "Planning your MCE to Marketing Cloud Next migration — Code to Click";
+const description = "A practical, staged approach to moving from Marketing Cloud Engagement to the new Marketing Cloud Next editions — what changes, when to move, and how to de-risk it.";
+---
+<Base title={title} description={description}>
+<section class="phero">
+  <div class="wrap" style="padding-bottom:52px">
+    <div class="crumb"><a href="/">Home</a> / <a href="/insights">Insights</a> / Marketing Cloud</div>
+    <span class="eyebrow kick">Marketing Cloud</span>
+    <h1>Planning your MCE to <span class="g">Marketing Cloud Next</span> migration</h1>
+    <div class="meta" style="color:#8FA0C4;font-family:'IBM Plex Mono';font-size:12px;margin-top:16px;display:flex;gap:14px;flex-wrap:wrap"><span>The Code to Click Team</span><span>7 min read</span><span>Marketing Cloud</span></div>
+  </div>
+</section>
+
+<section class="blk">
+  <div class="wrap">
+    <article class="article prose reveal">
+      <p class="lead">For most Marketing Cloud teams the question is no longer <em>whether</em> to move to Marketing Cloud Next &mdash; it's <em>when</em>, and <em>how</em> to do it without disrupting programs that are working today.</p>
+
+      <h2>What actually changes</h2>
+      <p>Classic Marketing Cloud Engagement (MCE) is its own platform: Contact Builder, Journey Builder, Email and Mobile Studio, Automation Studio and AMPscript, with SQL data extensions underneath. The new Marketing Cloud Next editions &mdash; <strong>Marketing Cloud Growth</strong> and <strong>Marketing Cloud Advanced</strong> &mdash; are built natively on the Salesforce core and <strong>Data 360</strong>.</p>
+      <p>That difference matters. On Next, your audiences come from a unified customer profile rather than isolated data extensions, orchestration runs on Salesforce Flow, and Einstein and Agentforce are part of the platform rather than add-ons. The upside is a single source of truth and AI that's genuinely native; the trade-off is that this is a re-platform, not an upgrade button.</p>
+
+      <h2>Should you move now?</h2>
+      <p>Lean toward moving sooner if you're consolidating on Salesforce, you want unified data driving personalization, or you're standing up net-new marketing and can start greenfield. Lean toward waiting if you run deep, mature MCE programs that depend on capabilities still maturing on Next &mdash; in which case coexistence buys you time.</p>
+      <blockquote>The right first move is rarely a big-bang cutover. It's an honest assessment and a coexistence plan.</blockquote>
+
+      <h2>A staged plan</h2>
+      <ol>
+        <li><strong>Assess.</strong> Inventory journeys, data sources, integrations and AMPscript. Score each program by value and by migration effort.</li>
+        <li><strong>Foundation.</strong> Stand up Data 360 &mdash; data streams, identity resolution and the model that will feed marketing &mdash; before you move a single journey.</li>
+        <li><strong>Pilot.</strong> Rebuild one contained, high-value program on Next. Prove the data, the orchestration and the deliverability.</li>
+        <li><strong>Migrate program by program.</strong> Move journeys in waves, running old and new side by side so nothing goes dark.</li>
+        <li><strong>Optimize.</strong> Retire MCE components as they're replaced, and lean into the native Einstein and Agentforce capabilities you couldn't use before.</li>
+      </ol>
+
+      <h2>Where migrations go wrong</h2>
+      <ul>
+        <li><strong>Skipping the data foundation.</strong> Next is only as good as the profile beneath it &mdash; get Data 360 right first.</li>
+        <li><strong>Underestimating AMPscript.</strong> Complex dynamic content needs redesign, not lift-and-shift.</li>
+        <li><strong>Deliverability drift.</strong> Sending reputation and IP warming deserve a plan of their own.</li>
+        <li><strong>Forgetting enablement.</strong> Marketers work differently on Flow-based orchestration; train alongside the build.</li>
+      </ul>
+
+      <p>Done in stages, a migration is far less risky than it looks &mdash; and you come out the other side with unified data and native AI, not just a newer tool.</p>
+
+      <div class="postnav">
+        <a class="arrow" href="/insights">&larr; All insights</a>
+        <a class="arrow" href="/marketing-cloud">Our Marketing Cloud practice &rarr;</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="blk alt" style="padding-top:56px;padding-bottom:56px"><div class="wrap"><div class="ctaband reveal">
+  <h2>Thinking about the move to Marketing Cloud Next?</h2>
+  <p>We'll run a readiness assessment and map a staged plan that keeps your live programs running.</p>
+  <div class="cta"><a class="btn btn-primary" href="/contact">Book a consult &rarr;</a></div>
+</div></div></section>
+</Base>

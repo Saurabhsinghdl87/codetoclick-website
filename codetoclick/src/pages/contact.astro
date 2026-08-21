@@ -1,0 +1,85 @@
+---
+import Base from '../layouts/Base.astro';
+const title = "Contact — Code to Click";
+const description = "Book a consult with Code to Click — a Salesforce-first, AI-native delivery partner. Tell us what you're building.";
+---
+<Base title={title} description={description}>
+
+<section class="phero">
+  <div class="wrap">
+    <div class="crumb"><a href="/">Home</a> / Contact</div>
+    <span class="eyebrow kick">Book a consult</span>
+    <h1>Tell us what <span class="g">you're building</span></h1>
+    <p class="lede">Share a few details and we'll get back within one business day &mdash; with a real person, not a bot, and a clear next step.</p>
+  </div>
+</section>
+
+<section class="blk">
+  <div class="wrap">
+    <div class="grid g2 reveal" style="gap:44px;align-items:start">
+      <div class="card">
+        <form class="form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+          <!-- Get a free access key at https://web3forms.com and paste it here -->
+          <input type="hidden" name="access_key" value="YOUR-WEB3FORMS-ACCESS-KEY" />
+          <input type="hidden" name="subject" value="New consult request — codetoclick.ai" />
+          <input type="hidden" name="from_name" value="Code to Click website" />
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
+          <div class="row">
+            <div class="field"><label>Full name</label><input type="text" name="name" required placeholder="Jane Doe" /></div>
+            <div class="field"><label>Work email</label><input type="email" name="email" required placeholder="jane@company.com" /></div>
+          </div>
+          <div class="row">
+            <div class="field"><label>Company</label><input type="text" name="company" placeholder="Company" /></div>
+            <div class="field"><label>I am a&hellip;</label><select name="audience"><option>Brand / end customer</option><option>Salesforce partner</option><option>Other</option></select></div>
+          </div>
+          <div class="field"><label>What do you need help with?</label><select name="topic"><option>Marketing Cloud</option><option>Core Clouds (Sales / Service / Experience)</option><option>Agentforce &amp; AI</option><option>Data 360</option><option>Managed Services</option><option>Not sure yet</option></select></div>
+          <div class="field"><label>Tell us more</label><textarea name="message" rows="4" placeholder="A sentence or two about your project, timeline and goals."></textarea></div>
+          <button class="btn btn-primary" type="submit" style="justify-content:center">Book a consult &rarr;</button>
+          <div class="ph-note" id="formNote">Submissions are delivered by Web3Forms &mdash; add your free access key above to activate.</div>
+        </form>
+        <div id="thanks" style="display:none;text-align:center;padding:20px">
+          <div class="svc-ic" style="margin:0 auto 14px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+          <h3>Thanks &mdash; we'll be in touch.</h3>
+          <p style="color:var(--text-muted)">A real person will reply within one business day.</p>
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow">What happens next</span>
+        <ul class="list-check" style="margin-top:16px">
+          <li><span class="ck">1</span> We reply within one business day to set up a short call.</li>
+          <li><span class="ck">2</span> We learn your goals, org and timeline &mdash; no obligation.</li>
+          <li><span class="ck">3</span> You get a clear recommendation and a proposed plan.</li>
+        </ul>
+        <div class="card" style="margin-top:24px">
+          <h4>Two ways to engage</h4>
+          <p style="margin-top:8px">Work with us <strong style="color:var(--text)">directly</strong> as your Salesforce partner, or use us as the <strong style="color:var(--text)">AI-native delivery team</strong> behind your firm.</p>
+          <a class="arrow" href="/why-code-to-click">How we engage &rarr;</a>
+        </div>
+        <div class="note" style="margin-top:20px"><span class="mono">Prefer email?</span><span>Add your team's contact details here &mdash; we'll wire this up in the build.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function(){
+    var form = document.getElementById('contactForm');
+    if (!form) return;
+    form.addEventListener('submit', function(e){
+      var key = form.querySelector('input[name="access_key"]').value;
+      if (key.indexOf('YOUR-') === 0) return; // not configured — let normal POST proceed / no-op
+      e.preventDefault();
+      var data = Object.fromEntries(new FormData(form));
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(function(r){ return r.json(); }).then(function(res){
+        if (res.success) { form.style.display = 'none'; document.getElementById('thanks').style.display = 'block'; }
+        else { document.getElementById('formNote').textContent = 'Something went wrong — please email us instead.'; }
+      }).catch(function(){ document.getElementById('formNote').textContent = 'Something went wrong — please email us instead.'; });
+    });
+  })();
+</script>
+
+</Base>

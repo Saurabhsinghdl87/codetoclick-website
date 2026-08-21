@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+const title = "Identity resolution in Data 360, without the headaches — Code to Click";
+const description = "A pragmatic approach to identity resolution in Salesforce Data 360 — from data streams to a unified profile that powers marketing and AI.";
+---
+<Base title={title} description={description}>
+<section class="phero">
+  <div class="wrap" style="padding-bottom:52px">
+    <div class="crumb"><a href="/">Home</a> / <a href="/insights">Insights</a> / Data 360</div>
+    <span class="eyebrow kick">Data 360</span>
+    <h1>Identity resolution in <span class="g">Data 360</span>, without the headaches</h1>
+    <div class="meta" style="color:#8FA0C4;font-family:'IBM Plex Mono';font-size:12px;margin-top:16px;display:flex;gap:14px;flex-wrap:wrap"><span>The Code to Click Team</span><span>5 min read</span><span>Data 360</span></div>
+  </div>
+</section>
+
+<section class="blk">
+  <div class="wrap">
+    <article class="article prose reveal">
+      <p class="lead">Every personalization program and every AI agent depends on one thing: knowing that the person on your website, in your CRM and on your email list is the same person. That's identity resolution &mdash; and in Data 360 it's more approachable than teams expect, if you sequence it right.</p>
+
+      <h2>The path from raw data to a unified profile</h2>
+      <p>Data 360 follows a clear flow, and it helps to keep the stages straight:</p>
+      <ol>
+        <li><strong>Data streams &rarr; DLOs.</strong> Bring sources in &mdash; CRM, web, commerce, files, external systems &mdash; landing as Data Lake Objects.</li>
+        <li><strong>Mapping &rarr; DMOs.</strong> Map those into the standard model (Data Model Objects) so different sources speak the same language.</li>
+        <li><strong>Identity resolution ruleset.</strong> Define how records are matched and reconciled into a single unified individual.</li>
+        <li><strong>Unified profile.</strong> The result &mdash; one real-time profile that marketing, service and AI all read from.</li>
+      </ol>
+
+      <h2>Match rules: start deterministic</h2>
+      <p>Resolution rules come in two flavors. <strong>Deterministic</strong> matching uses exact keys &mdash; email, a customer ID, a phone number. <strong>Fuzzy</strong> matching handles near-matches like name plus address with minor variation. Start with deterministic rules you trust, confirm the results, then layer in fuzzy matching only where you need it and can validate it.</p>
+      <blockquote>Over-matching is worse than under-matching. Merging two different people erodes trust in the whole profile.</blockquote>
+
+      <h2>Reconciliation: which value wins?</h2>
+      <p>When two sources disagree, reconciliation rules decide the surviving value &mdash; most recent, most trusted source, or a priority order you define. Get this right and the unified profile stays clean; ignore it and you get contradictory data that quietly undermines every downstream use.</p>
+
+      <h2>Where teams stumble</h2>
+      <ul>
+        <li><strong>Bad source data in, bad profile out.</strong> Fix obvious quality issues upstream first.</li>
+        <li><strong>Over-aggressive fuzzy matching.</strong> Validate against known records before trusting it.</li>
+        <li><strong>Ignoring consent and PII.</strong> Bake governance into the model, not on as an afterthought.</li>
+        <li><strong>Boiling the ocean.</strong> Start with the sources that drive your top use case, not all of them.</li>
+      </ul>
+
+      <h2>Why it's worth it</h2>
+      <p>A trustworthy unified profile is what makes 1:1 personalization in Marketing Cloud real, grounds Agentforce agents in accurate data, and lets every team work from the same customer. Identity resolution isn't the glamorous part of a project &mdash; but it's the part everything else stands on.</p>
+
+      <div class="postnav">
+        <a class="arrow" href="/insights">&larr; All insights</a>
+        <a class="arrow" href="/data-360">Our Data 360 practice &rarr;</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="blk alt" style="padding-top:56px;padding-bottom:56px"><div class="wrap"><div class="ctaband reveal">
+  <h2>Ready to unify your customer data?</h2>
+  <p>We'll assess your sources and design an identity and activation plan built for marketing and AI.</p>
+  <div class="cta"><a class="btn btn-primary" href="/contact">Book a consult &rarr;</a><a class="btn btn-light" href="/data-360">See Data 360</a></div>
+</div></div></section>
+</Base>

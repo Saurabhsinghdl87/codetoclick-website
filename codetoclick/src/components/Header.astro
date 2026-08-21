@@ -1,0 +1,59 @@
+---
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const services = [
+  ['/marketing-cloud', 'Marketing Cloud', 'Flagship Martech practice'],
+  ['/core-clouds', 'Core Clouds', 'Sales · Service · Experience'],
+  ['/agentforce-ai', 'Agentforce & AI', 'Agents, Einstein, automation'],
+  ['/data-360', 'Data 360', 'Identity, segments, activation'],
+  ['/managed-services', 'Managed Services', 'Run & enhance, AMS'],
+  ['/accelerators', 'Accelerators', 'Reusable AI assets'],
+];
+const nav = [
+  ['/industries', 'Industries'],
+  ['/why-code-to-click', 'Why Us'],
+  ['/work', 'Work'],
+  ['/insights', 'Insights'],
+];
+const active = (p) => (path === p ? ' class="active"' : '');
+---
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/"><svg width="34" height="34" viewBox="0 0 64 64"><use href="#mark"/></svg><span class="w">Code<span class="to">to</span>Click</span></a>
+    <nav class="links">
+      <span class="hasmenu">
+        <a href="/marketing-cloud">Services</a>
+        <span class="dropdown"><span class="inner">
+          {services.map(([href, name, sub]) => (
+            <a href={href}>{name}<span>{sub}</span></a>
+          ))}
+        </span></span>
+      </span>
+      {nav.map(([href, label]) => (
+        <a href={href} class={path === href ? 'active' : undefined}>{label}</a>
+      ))}
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="/about">About</a>
+      <a class="btn btn-primary" href="/contact">Book a consult</a>
+      <button class="menu-btn" aria-label="Menu" id="mbtn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mm">
+    <div class="grp">Services</div>
+    {services.map(([href, name]) => (<a href={href}>{name}</a>))}
+    <div class="grp">Company</div>
+    <a href="/industries">Industries</a>
+    <a href="/why-code-to-click">Why Us</a>
+    <a href="/work">Work</a>
+    <a href="/about">About</a>
+    <a href="/insights">Insights</a>
+    <a href="/contact">Book a consult</a>
+  </div>
+</header>
+<script is:inline>
+  (function(){
+    var b = document.getElementById('mbtn');
+    if (b) b.addEventListener('click', function(){ document.getElementById('mm').classList.toggle('open'); });
+    document.querySelectorAll('#mm a').forEach(function(a){ a.addEventListener('click', function(){ document.getElementById('mm').classList.remove('open'); }); });
+  })();
+</script>
