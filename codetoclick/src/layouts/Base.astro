@@ -41,12 +41,43 @@ const ogimg = new URL('/assets/og.png', site).href;
   <slot />
   <Footer />
 
+  <div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie consent" hidden>
+    <div class="cookie-inner">
+      <div class="cookie-text">
+        <strong>We value your privacy</strong>
+        <p>We use essential cookies to make our site work, and analytics cookies &mdash; only with your consent &mdash; to improve it. See our <a href="/privacy#cookies">Cookie &amp; Privacy Policy</a>.</p>
+      </div>
+      <div class="cookie-actions">
+        <button type="button" class="btn btn-ghost" id="cookie-decline">Decline</button>
+        <button type="button" class="btn btn-primary" id="cookie-accept">Accept</button>
+      </div>
+    </div>
+  </div>
+
   <script is:inline>
     (function(){
       var els = document.querySelectorAll('.reveal');
       if (!('IntersectionObserver' in window)) { els.forEach(function(e){ e.classList.add('in'); }); return; }
       var io = new IntersectionObserver(function(en){ en.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold:.05, rootMargin:'0px 0px -6% 0px' });
       els.forEach(function(e){ io.observe(e); });
+    })();
+  </script>
+
+  <script is:inline>
+    (function(){
+      var KEY = 'ctc-cookie-consent';
+      var banner = document.getElementById('cookie-banner');
+      if (!banner) return;
+      var choice = null;
+      try { choice = localStorage.getItem(KEY); } catch(e) {}
+      function save(v){ try { localStorage.setItem(KEY, v); } catch(e) {} }
+      function hide(){ banner.hidden = true; banner.classList.remove('show'); }
+      function show(){ banner.hidden = false; requestAnimationFrame(function(){ banner.classList.add('show'); }); }
+      if (choice !== 'accepted' && choice !== 'declined') { show(); }
+      var a = document.getElementById('cookie-accept');
+      var d = document.getElementById('cookie-decline');
+      if (a) a.addEventListener('click', function(){ save('accepted'); hide(); });
+      if (d) d.addEventListener('click', function(){ save('declined'); hide(); });
     })();
   </script>
 </body>
