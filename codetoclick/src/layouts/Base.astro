@@ -102,20 +102,55 @@ const ogimg = new URL('/assets/og.png', site).href;
         upd();
       }
 
+      /* interactive neural field behind EVERY page header (.hero + .phero) */
+      var resizers = [];
+      document.querySelectorAll('.hero, .phero').forEach(function(host){
+        var canvas = document.createElement('canvas');
+        canvas.className = 'hero-fx'; canvas.setAttribute('aria-hidden', 'true');
+        host.insertBefore(canvas, host.firstChild);
+        var ctx = canvas.getContext('2d');
+        var dpr = Math.min(window.devicePixelRatio || 1, 2);
+        var W = 0, H = 0, nodes = [], mouse = { x: -999, y: -999 }, raf = null;
+        var COLORS = ['#22D3EE', '#5C8CFF', '#8B5CF6'];
+        function sz(){
+          W = host.clientWidth; H = host.clientHeight;
+          canvas.width = W * dpr; canvas.height = H * dpr;
+          canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          var count = Math.min(64, Math.round(W * H / 17000));
+          nodes = [];
+          for (var i = 0; i < count; i++) nodes.push({ x: Math.random()*W, y: Math.random()*H, vx:(Math.random()-.5)*.32, vy:(Math.random()-.5)*.32, r: Math.random()*1.5+1, c: COLORS[i%3] });
+        }
+        function draw(){
+          ctx.clearRect(0,0,W,H);
+          for (var i=0;i<nodes.length;i++){ var n=nodes[i]; n.x+=n.vx; n.y+=n.vy; if(n.x<0||n.x>W)n.vx*=-1; if(n.y<0||n.y>H)n.vy*=-1; var dxm=n.x-mouse.x,dym=n.y-mouse.y,dm=Math.sqrt(dxm*dxm+dym*dym); if(dm<120){n.x+=dxm/dm*.6;n.y+=dym/dm*.6;} ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,6.2832); ctx.fillStyle=n.c; ctx.globalAlpha=.85; ctx.fill(); }
+          for (var a=0;a<nodes.length;a++){ for(var b=a+1;b<nodes.length;b++){ var dx=nodes[a].x-nodes[b].x,dy=nodes[a].y-nodes[b].y,d=Math.sqrt(dx*dx+dy*dy); if(d<126){ ctx.beginPath(); ctx.moveTo(nodes[a].x,nodes[a].y); ctx.lineTo(nodes[b].x,nodes[b].y); ctx.strokeStyle=nodes[a].c; ctx.globalAlpha=(1-d/126)*.26; ctx.lineWidth=.7; ctx.stroke(); } } var mx=nodes[a].x-mouse.x,my=nodes[a].y-mouse.y,md=Math.sqrt(mx*mx+my*my); if(md<165){ ctx.beginPath(); ctx.moveTo(nodes[a].x,nodes[a].y); ctx.lineTo(mouse.x,mouse.y); ctx.strokeStyle='#7FE9F5'; ctx.globalAlpha=(1-md/165)*.5; ctx.lineWidth=.8; ctx.stroke(); } }
+          ctx.globalAlpha=1; raf=requestAnimationFrame(draw);
+        }
+        function play(){ if(!raf) raf=requestAnimationFrame(draw); }
+        function halt(){ if(raf){ cancelAnimationFrame(raf); raf=null; } }
+        sz(); resizers.push(sz);
+        if (reduce){ draw(); halt(); }
+        else {
+          play();
+          host.addEventListener('mousemove', function(e){ var r=host.getBoundingClientRect(); mouse.x=e.clientX-r.left; mouse.y=e.clientY-r.top; });
+          host.addEventListener('mouseleave', function(){ mouse.x=-999; mouse.y=-999; });
+          document.addEventListener('visibilitychange', function(){ document.hidden ? halt() : play(); });
+        }
+      });
+      var rzt; window.addEventListener('resize', function(){ clearTimeout(rzt); rzt=setTimeout(function(){ resizers.forEach(function(f){ f(); }); }, 200); });
+
       if (!fine) return; /* skip pointer effects on touch */
 
-      /* cursor spotlight on dark page heroes (subpages) */
-      document.querySelectorAll('.phero').forEach(function(el){
-        var g = document.createElement('div');
-        g.className = 'cursor-glow';
-        el.insertBefore(g, el.firstChild);
-        el.addEventListener('mousemove', function(e){
-          var r = el.getBoundingClientRect();
-          g.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-          g.style.setProperty('--my', (e.clientY - r.top) + 'px');
-          g.style.opacity = '1';
+      /* magnetic buttons */
+      if (!reduce) document.querySelectorAll('.btn').forEach(function(btn){
+        btn.addEventListener('mousemove', function(e){
+          var r = btn.getBoundingClientRect();
+          var mx = e.clientX - (r.left + r.width/2);
+          var my = e.clientY - (r.top + r.height/2);
+          btn.style.transform = 'translate(' + (mx*0.18).toFixed(1) + 'px,' + (my*0.28 - 2).toFixed(1) + 'px)';
         });
-        el.addEventListener('mouseleave', function(){ g.style.opacity = '0'; });
+        btn.addEventListener('mouseleave', function(){ btn.style.transform = ''; });
       });
 
       /* 3D tilt + glow on interactive cards */

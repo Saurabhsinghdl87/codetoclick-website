@@ -413,3 +413,65 @@ footer.ft .bottom a:hover{color:#fff;}
 @media (max-width:760px){.map-embed{min-height:280px;}.map-embed iframe{min-height:280px;}}
 /* footer address */
 footer.ft .addr{margin-top:14px;font-style:normal;font-size:13px;line-height:1.6;color:#8FA0C4;}
+
+/* ============================================================
+   Interactive "explorer" (replaces carousel)
+   ============================================================ */
+.explorer{display:grid;grid-template-columns:.82fr 1.18fr;gap:22px;align-items:stretch;}
+.exp-rail{display:flex;flex-direction:column;gap:10px;}
+.exp-tab{position:relative;display:flex;align-items:center;gap:14px;text-align:left;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:15px 18px;cursor:pointer;transition:border-color .2s,background .2s,transform .2s;font-family:inherit;color:var(--text);overflow:hidden;}
+.exp-tab:hover{border-color:color-mix(in srgb,var(--brand) 42%,var(--border));transform:translateX(3px);}
+.exp-tab.active{border-color:transparent;background:var(--brand-ink);color:#fff;box-shadow:var(--shadow);}
+.exp-tab .et-no{font-family:"IBM Plex Mono";font-size:12px;color:var(--text-faint);font-weight:600;}
+.exp-tab.active .et-no{color:#7FE9F5;}
+.et-body{display:flex;flex-direction:column;gap:2px;}
+.et-t{font-family:"Sora";font-weight:700;font-size:15.5px;}
+.et-d{font-size:12.5px;color:var(--text-muted);}
+.exp-tab.active .et-d{color:#B9C6E6;}
+.et-bar{position:absolute;left:0;bottom:0;height:3px;width:100%;background:transparent;}
+.et-bar i{display:block;height:100%;width:0;background:var(--grad);}
+.exp-stage{position:relative;border-radius:var(--r);overflow:hidden;min-height:330px;box-shadow:var(--shadow);}
+.exp-panel{position:absolute;inset:0;display:grid;grid-template-columns:.9fr 1.1fr;gap:24px;align-items:center;padding:40px 44px;background:var(--brand-ink);opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease,visibility .5s;}
+.exp-panel::before{content:"";position:absolute;inset:0;opacity:.92;}
+.exp-panel>*{position:relative;z-index:1;}
+.exp-panel.active{position:relative;opacity:1;visibility:visible;transform:none;}
+.ep-art{display:grid;place-items:center;}
+.ep-art svg{width:100%;max-width:310px;height:auto;}
+.ep-copy h3{color:#fff;font-size:clamp(22px,2.5vw,29px);margin:0 0 12px;letter-spacing:-0.02em;}
+.ep-copy p{color:#C3D0EC;font-size:15.5px;margin:0 0 18px;max-width:44ch;}
+.ep-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+.ep-chips span{font-family:"IBM Plex Mono";font-size:11.5px;color:#DDE6F7;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);padding:5px 11px;border-radius:100px;}
+.ep-link{font-family:"Sora";font-weight:600;font-size:15px;color:#9DB8FF;}
+.ep-link:hover{color:#fff;}
+@media (max-width:860px){
+  .explorer{grid-template-columns:1fr;}
+  .exp-rail{flex-direction:row;overflow-x:auto;gap:8px;padding-bottom:4px;}
+  .exp-tab{min-width:210px;flex:0 0 auto;transform:none!important;}
+  .exp-panel{grid-template-columns:1fr;padding:30px 26px;}
+  .ep-art{display:none;}
+  .exp-stage{min-height:0;}
+}
+@media (prefers-reduced-motion:reduce){.exp-panel{transition:none;}.exp-tab{transition:none;}}
+
+/* ============================================================
+   Bento grid (home "what we do")
+   ============================================================ */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:minmax(160px,auto);gap:18px;}
+.bento .card{margin:0;}
+.bento .b-lg{grid-column:span 2;grid-row:span 2;display:flex;flex-direction:column;}
+.bento .b-lg .arrow{margin-top:auto;}
+.bento .b-wide{grid-column:span 2;}
+.bento .b-bar{grid-column:span 4;display:flex;align-items:center;gap:20px;}
+.bento .b-bar .svc-ic{margin:0;flex-shrink:0;}
+.bento .b-bar .b-bar-body{flex:1;}
+.bento .b-bar .b-bar-body h3{margin:0 0 4px;}
+.bento .b-bar .b-bar-body p{margin:0;}
+.bento .b-bar .arrow{flex-shrink:0;}
+@media (max-width:900px){
+  .bento{grid-template-columns:repeat(2,1fr);}
+  .bento .b-lg,.bento .b-wide,.bento .b-bar{grid-column:auto;grid-row:auto;}
+}
+@media (max-width:560px){
+  .bento{grid-template-columns:1fr;}
+  .bento .b-bar{flex-direction:column;align-items:flex-start;gap:12px;}
+}
