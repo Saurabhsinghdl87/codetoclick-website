@@ -35,6 +35,15 @@ const ogimg = new URL('/assets/og.png', site).href;
     "logo": "https://codetoclick.ai/assets/og.png",
     "description": "AI-first Salesforce consultancy delivering Agentforce, Marketing Cloud and Data 360 at the speed of AI.",
     "slogan": "Salesforce, delivered at the speed of AI.",
+    "email": "hello@codetoclick.ai",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Plot No. 41, Ground Floor, Block B, Sector 63",
+      "addressLocality": "Noida",
+      "addressRegion": "Uttar Pradesh",
+      "postalCode": "201301",
+      "addressCountry": "IN"
+    },
     "knowsAbout": ["Salesforce", "Agentforce", "Agentforce 360", "Marketing Cloud", "Data 360", "AI adoption", "Marketing Cloud Engagement", "Einstein"]
   })} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -47,6 +56,7 @@ const ogimg = new URL('/assets/og.png', site).href;
     <symbol id="mark" viewBox="0 0 64 64"><rect x="4" y="4" width="56" height="56" rx="16" fill="url(#cg)"/><path d="M25 20 L15 32 L25 44" fill="none" stroke="#fff" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M31 21 L49 32 L31 43 L36 32 Z" fill="#fff"/></symbol>
   </defs></svg>
 
+  <div class="scroll-prog" id="scrollprog" aria-hidden="true"></div>
   <Header />
   <slot />
   <Footer />
@@ -70,6 +80,62 @@ const ogimg = new URL('/assets/og.png', site).href;
       if (!('IntersectionObserver' in window)) { els.forEach(function(e){ e.classList.add('in'); }); return; }
       var io = new IntersectionObserver(function(en){ en.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold:.05, rootMargin:'0px 0px -6% 0px' });
       els.forEach(function(e){ io.observe(e); });
+    })();
+  </script>
+
+  <script is:inline>
+    (function(){
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var fine = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+      /* scroll progress bar */
+      var bar = document.getElementById('scrollprog');
+      if (bar){
+        var ticking = false;
+        function upd(){
+          var h = document.documentElement;
+          var max = h.scrollHeight - h.clientHeight;
+          bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+          ticking = false;
+        }
+        window.addEventListener('scroll', function(){ if (!ticking){ requestAnimationFrame(upd); ticking = true; } }, {passive:true});
+        upd();
+      }
+
+      if (!fine) return; /* skip pointer effects on touch */
+
+      /* cursor spotlight on dark page heroes (subpages) */
+      document.querySelectorAll('.phero').forEach(function(el){
+        var g = document.createElement('div');
+        g.className = 'cursor-glow';
+        el.insertBefore(g, el.firstChild);
+        el.addEventListener('mousemove', function(e){
+          var r = el.getBoundingClientRect();
+          g.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+          g.style.setProperty('--my', (e.clientY - r.top) + 'px');
+          g.style.opacity = '1';
+        });
+        el.addEventListener('mouseleave', function(){ g.style.opacity = '0'; });
+      });
+
+      /* 3D tilt + glow on interactive cards */
+      if (reduce) return;
+      document.querySelectorAll('.card.hover').forEach(function(card){
+        card.addEventListener('mousemove', function(e){
+          var r = card.getBoundingClientRect();
+          var px = (e.clientX - r.left) / r.width;
+          var py = (e.clientY - r.top) / r.height;
+          var rx = (py - .5) * -6, ry = (px - .5) * 6;
+          card.style.transform = 'perspective(760px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg) translateY(-4px)';
+          card.style.setProperty('--gx', (px * 100) + '%');
+          card.style.setProperty('--gy', (py * 100) + '%');
+          card.classList.add('lit');
+        });
+        card.addEventListener('mouseleave', function(){
+          card.style.transform = '';
+          card.classList.remove('lit');
+        });
+      });
     })();
   </script>
 
