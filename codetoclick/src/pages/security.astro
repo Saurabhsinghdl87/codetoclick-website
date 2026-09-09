@@ -1,0 +1,53 @@
+---
+import Base from '../layouts/Base.astro';
+const title = "Security & Trust — CodetoClick";
+const description = "How CodetoClick protects client data and delivers securely on Salesforce — least-privilege access, human accountability, and alignment to your security and compliance requirements.";
+---
+<Base title={title} description={description}>
+<section class="phero">
+  <div class="wrap" style="padding-bottom:52px">
+    <div class="crumb"><a href="/">Home</a> / Security &amp; Trust</div>
+    <span class="eyebrow kick">Security &amp; trust</span>
+    <h1>Secure by default, <span class="g">accountable by design</span></h1>
+    <div class="meta" style="color:#8FA0C4;font-family:'IBM Plex Mono';font-size:12px;margin-top:16px;display:flex;gap:14px;flex-wrap:wrap"><span>Last updated: 9 September 2026</span></div>
+  </div>
+</section>
+
+<section class="blk">
+  <div class="wrap">
+    <article class="article prose reveal">
+      <p class="lead">Speed never comes at the expense of security. AI accelerates how we build, but experienced people stay accountable for every change, and we work inside your controls &mdash; not around them. This page summarizes the standards and practices we follow on every engagement.</p>
+
+      <h2>Access &amp; least privilege</h2>
+      <p>Our consultants work with the minimum access required for the task, granted for the duration it is needed and removed when the engagement ends. We use your provisioning and SSO/MFA wherever possible, never share credentials, and prefer sandbox and scratch environments for build and testing before anything reaches production.</p>
+
+      <h2>Human accountability at every gate</h2>
+      <p>AI drafts, generates and tests &mdash; but a named, experienced person reviews and approves every design decision, code change and release. Nothing ships on AI output alone. Changes are documented, reversible, and traceable so you always know what changed, why, and who signed off.</p>
+
+      <h2>Data handling &amp; privacy</h2>
+      <p>We collect and touch only the data an engagement requires, handle it according to your data-classification and retention policies, and return or delete working copies when work concludes. We do not use client data to train AI models, and we keep client environments and data logically separated. Our website privacy practices are described in our <a href="/privacy">Privacy Policy</a>.</p>
+
+      <h2>Secure delivery &amp; environments</h2>
+      <p>We follow secure development practices throughout the AI-native lifecycle: version-controlled change management, environment separation (dev / test / production), AI-generated plus human-reviewed test coverage, and pre-release risk and security scans. Secrets and keys are stored in managed secret stores, never in code or documents.</p>
+
+      <h2>Built on the Salesforce security model</h2>
+      <p>Our work runs on Salesforce&rsquo;s enterprise security foundation &mdash; profiles, permission sets, sharing rules, field-level security, Shield encryption and event monitoring where licensed. We design to the principle of least privilege inside the org and configure Agentforce and automation with guardrails and human-in-the-loop review.</p>
+
+      <h2>Aligning to your compliance requirements</h2>
+      <p>We adapt to the standards our clients operate under &mdash; for example SOC 2, ISO 27001, HIPAA, FERPA and GDPR &mdash; and work within your policies, DPAs and security reviews. We are glad to complete security questionnaires and sign confidentiality and data-processing agreements before an engagement begins.</p>
+
+      <h2>Responsible AI</h2>
+      <p>We use AI to accelerate delivery, with clear boundaries: grounded on approved data, scoped to defined tasks, guarded against unsafe actions, and always reviewed by a person before it affects your systems or customers.</p>
+
+      <h2>Report a concern</h2>
+      <p>To request our security details, complete a questionnaire, or report a security concern, email <a href="mailto:security@codetoclick.ai">security@codetoclick.ai</a> and we&rsquo;ll respond promptly.</p>
+    </article>
+  </div>
+</section>
+
+<section class="blk alt" style="padding-top:56px;padding-bottom:56px"><div class="wrap"><div class="ctaband reveal">
+  <h2>Questions about how we work securely?</h2>
+  <p>We&rsquo;re happy to walk your security team through our practices before we start.</p>
+  <div class="cta"><a class="btn btn-primary" href="/contact">Talk to us &rarr;</a></div>
+</div></div></section>
+</Base>
